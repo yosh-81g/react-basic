@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+/* eslint react-hooks/exhaustive-deps: off */
+import React, { useEffect, useState } from "react";
 import ColorfulMessage from "./components/ColorfulMessage";
 
 const App = () => {
+  console.log("start");
   const [num, setNum] = useState(0);
-  const [faceShowFlg, setFaceShowFlg] = useState(true);
+  const [faceShowFlg, setFaceShowFlg] = useState(false);
 
   const onClickCountuUp = () => {
     setNum(num + 1);
@@ -11,6 +13,16 @@ const App = () => {
   const onClickSwitchShowFlg = () => {
     setFaceShowFlg(!faceShowFlg);
   };
+
+  useEffect(() => {
+    if (num > 0) {
+      if (num % 3 === 0) {
+        faceShowFlg || setFaceShowFlg(true);
+      } else {
+        faceShowFlg && setFaceShowFlg(false);
+      }
+    }
+  }, [num]);
 
   return (
     <>
